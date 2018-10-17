@@ -7,5 +7,5 @@ class Job(models.Model):
 
 
 class User(AbstractUser):
-    will_want = models.ManyToManyField(Job, related_name='users_wanting')
+    would_want = models.ManyToManyField(Job, related_name='users_wanting')
     would_do = models.ManyToManyField(Job, related_name='users_doing')
