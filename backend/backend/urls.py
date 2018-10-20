@@ -16,10 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+import rest_framework.authtoken.views
+
 import jobs.urls
+import jobs.views.auth
 
 urlpatterns = [
-    path('jobs/', include(jobs.urls.router.urls)),
+    path('api/', include(jobs.urls.router.urls)),
     path('admin/', admin.site.urls),
-    path('api-auth/', include('rest_framework.urls')),
+    path('get-token/', admin.site.urls),
+    path('api-auth/', rest_framework.authtoken.views.obtain_auth_token),
+    path('signup/', jobs.views.auth.sign_up),
 ]
