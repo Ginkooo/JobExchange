@@ -24,7 +24,7 @@ import jobs.views.auth
 urlpatterns = [
     path('api/', include(jobs.urls.router.urls)),
     path('admin/', admin.site.urls),
-    path('get-token/', admin.site.urls),
-    path('api-auth/', rest_framework.authtoken.views.obtain_auth_token),
+    path('get-token/', rest_framework.authtoken.views.obtain_auth_token),
+    path('api-auth/', include('rest_framework.urls')),
     path('signup/', jobs.views.auth.sign_up),
 ]

@@ -12,15 +12,23 @@ class AuthTests(TestCase):
             'email': 'test@test.com'
         }
 
-        resp = self.client.post('/signup/', data).json()
-        self.assertIn('token', resp)
+        resp = self.client.post('/signup/', data, content_type='application/json')
+        self.assertEqual(201, resp.status_code)
+        user = get_user_model().objects.get(username='test')
+        self.assertEqual('test@test.com', user.email)
 
     def test_can_get_auth_token(self):
-        user = get_user_model().objects.create_user(
+        get_user_model().objects.create_user(
             username='test',
             password='foo',
             email='test@test.com',
         )
-        resp = self.client.get('/get-token/')
-        print(resp)
-        import ipdb; ipdb.set_trace()
+
+        data = {
+            'username': 'test',
+            'password': 'foo',
+        }
+
+        resp = self.client.post('/get-token/', data).json()
+
+        self.assertIn('token', resp)
