@@ -53,6 +53,10 @@ export default class Login extends React.Component {
       return
     }
 
+    STORAGE.remove({
+      key: 'authToken'
+    })
+
     makeRequest({
       url: '/get-token/',
       method: 'POST',

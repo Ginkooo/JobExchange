@@ -46,7 +46,7 @@ export default class SignUp extends React.Component {
             url: '/signup/',
             method: 'POST',
             body: this.state,
-            onSuccess: (json) => {POPUP('success', 'Signed up successfuly, you can log in now'); navigation.navigate('Login')},
+            onSuccess: (json) => {POPUP('success', 'Zarejestrowano pomyślnie, możesz się teraz zalogować'); navigation.navigate('Login')},
             onError: (json) => {POPUP('error', JSON.stringify(json))}
         })
 

@@ -29,11 +29,20 @@ export async function makeRequest (config) {
     let url = `http://192.168.1.9:8000${config.url}`
     console.log(url)
 
-    let response = await fetch(url, {
-        method: method,
-        body: JSON.stringify(body),
-        headers: headers
-    })
+    let response = null
+
+    if (method === 'GET' || method === 'HEAD') {
+      response = await fetch(url, {
+          method: method,
+          headers: headers
+      })
+    } else {
+      response = await fetch(url, {
+          method: method,
+          body: JSON.stringify(body),
+          headers: headers
+      })
+    }
 
     let json = await response.json()
 
