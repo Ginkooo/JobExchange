@@ -20,8 +20,10 @@ import rest_framework.authtoken.views
 
 import jobs.urls
 import jobs.views.auth
+import jobs.views.job
 
 urlpatterns = [
+    path('api/favjob/', jobs.views.job.add_favorite_job),
     path('api/', include(jobs.urls.router.urls)),
     path('admin/', admin.site.urls),
     path('get-token/', rest_framework.authtoken.views.obtain_auth_token),
