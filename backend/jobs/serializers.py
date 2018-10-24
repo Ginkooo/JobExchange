@@ -6,6 +6,12 @@ from jobs import models
 
 
 class JobSerializer(serializers.ModelSerializer):
+    would_do = serializers.BooleanField(
+        read_only=True
+    )
+    would_want = serializers.BooleanField(
+        read_only=True
+    )
     class Meta:
         model = models.Job
         fields = '__all__'
