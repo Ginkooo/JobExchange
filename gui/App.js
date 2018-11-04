@@ -4,7 +4,7 @@ import { createStackNavigator } from 'react-navigation'
 import Login from './Login'
 import SignUp from './SignUp'
 import Profile from './Profile'
-import WouldWantJobs from './WouldWantJobs'
+import ExploreJobs from './ExploreJobs'
 
 const RootStack = createStackNavigator({
   Login: {
@@ -16,11 +16,11 @@ const RootStack = createStackNavigator({
   Profile: {
     screen: Profile
   },
-  WouldWantJobs: {
-    screen: WouldWantJobs
+  ExploreJobs: {
+    screen: ExploreJobs
   }
 }, {
-  initialRouteName: 'Login'
+  initialRouteName: 'ExploreJobs'
 })
 
 export default class App extends React.Component {

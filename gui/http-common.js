@@ -1,60 +1,59 @@
 import { STORAGE } from './storage'
 
 export async function makeRequest (config) {
-    let token = null
+  let token = null
 
-    try {
-        token = await STORAGE.load({
-            key: 'authToken'
-        })
-    } catch (error) {
-        console.log('no token')
-    }
-
-    let headers = {}
-
-    if (token) {
-      console.log('Token is: ' + token)
-        headers = {
-            Authorization: 'Token ' + token
-        }
-    }
-
-    let method = config.method || 'GET'
-    let body = config.body || {}
-
-    headers.Accept = 'application/json'
-    headers['Content-Type'] = 'application/json'
-
-    let url = `http://192.168.1.9:8000${config.url}`
-    console.log(url)
-
-    let response = null
-
-    if (method === 'GET' || method === 'HEAD') {
-      response = await fetch(url, {
-          method: method,
-          headers: headers
+  try {
+      token = await STORAGE.load({
+          key: 'authToken'
       })
-    } else {
-      response = await fetch(url, {
-          method: method,
-          body: JSON.stringify(body),
-          headers: headers
-      })
-    }
+  } catch (error) {
+      console.log('There is no authorization token in cache right now, wont include it in requests')
+  }
 
-    let json = await response.json()
+  let headers = {}
 
-    console.log(JSON.stringify(json))
+  if (token) {
+    console.log('Token is: ' + token)
+      headers = {
+          Authorization: 'Token ' + token
+      }
+  }
 
-    if (response.status >=200 && response.status < 300) {
-        if (config.onSuccess) {
+  let method = config.method || 'GET'
+  let body = config.body || {}
+
+  headers.Accept = 'application/json'
+  headers['Content-Type'] = 'application/json'
+
+  let url = `http://192.168.1.9:8000${config.url}`
+
+  let fetch_args = {
+    headers: headers,
+    method: method
+  }
+
+  if (!['get', 'head', 'options'].includes(method.toLowerCase()))
+    fetch_args.body = JSON.stringify(body)
+
+  let response = fetch(url, fetch_args)
+    .then(resp => {
+      resp.json()
+        .then(json => {
+          if (resp.status >= 200 && resp.status < 300) {
             config.onSuccess(json)
-        }
-    } else {
-        if (config.onError) {
+          } else {
             config.onError(json)
-        }
-    }
+          }
+        })
+        .catch(err => {
+          console.log('server returned no json response during request')
+          console.log(err)
+        })
+    })
+    .catch(err => {
+      console.log(err)
+      console.log(`ERROR ${JSON.stringify(err)}`)
+    })
+  console.log(`Just made request to ${url}`)
 }

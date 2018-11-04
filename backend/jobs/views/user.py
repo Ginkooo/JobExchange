@@ -6,7 +6,7 @@ from jobs import serializers
 
 
 class UserViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAdminUser,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     queryset = get_user_model().objects.all()
     serializer_class = serializers.UserSerializer

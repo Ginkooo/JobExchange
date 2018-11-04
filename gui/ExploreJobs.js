@@ -6,7 +6,7 @@ import { makeRequest } from './http-common'
 import { POPUP } from './popup'
 
 
-export default class WouldWantJobs extends React.Component {
+export default class ExploreJobs extends React.Component {
   constructor(props) {
     super(props)
 
@@ -17,7 +17,6 @@ export default class WouldWantJobs extends React.Component {
       method: 'GET',
       onSuccess: (json) => {
         this.setState({jobs: json})
-        POPUP('success', `Got ${json.length} jobs`)
       },
       onError: (json) => {
         POPUP('error', JSON.stringify(json))

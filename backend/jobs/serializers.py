@@ -12,6 +12,7 @@ class JobSerializer(serializers.ModelSerializer):
     would_want = serializers.BooleanField(
         read_only=True
     )
+
     class Meta:
         model = models.Job
         fields = '__all__'
@@ -23,4 +24,4 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = get_user_model()
-        fields = '__all__'
+        fields = 'id username email'.split()

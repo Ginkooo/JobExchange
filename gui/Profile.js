@@ -21,12 +21,8 @@ export default class Profile extends React.Component {
     navigation.navigate('MyJobs')
   }
 
-  wouldWantJobsClicked(navigation) {
-    navigation.navigate('WouldWantJobs')
-  }
-
-  wouldDoJobsClicked(navigation) {
-    navigation.navigate('WouldDoJobs')
+  exploreJobsClicked(navigation) {
+    navigation.navigate('ExploreJobs')
   }
 
   logOutClicked(navigation) {
@@ -54,31 +50,26 @@ export default class Profile extends React.Component {
         <View style={{
           flex: 0.2
         }}>
-        <Text>{this.state.username}</Text>
-        </View>
-        <TouchableOpacity onPress={() => {this.myJobsClicked(this.props.navigation)}} style={[styles.button, {
-          backgroundColor: 'green',
-        }]}>
-          <Text style={styles.buttonText}>My jobs</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => {this.wouldWantJobsClicked(this.props.navigation)}} style={[styles.button, {
-          backgroundColor: 'purple',
-        }]}>
-          <Text style={styles.buttonText}>"Would want" jobs</Text>
-        </TouchableOpacity>
-          <TouchableOpacity onPress={() => {this.wouldDoJobsClicked(this.props.navigation)}} style={[styles.button, {
-          backgroundColor: 'red',
-        }]}>
-          <Text style={styles.buttonText}>"Would do" jobs</Text>
-        </TouchableOpacity>
-            <TouchableOpacity onPress={() => {this.logOutClicked(this.props.navigation)}} style={[{
+          <Text>{this.state.username}</Text>
+          </View>
+          <TouchableOpacity onPress={() => {this.myJobsClicked(this.props.navigation)}} style={[styles.button, {
+            backgroundColor: 'green',
+          }]}>
+            <Text style={styles.buttonText}>My jobs</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => {this.exploreJobsClicked(this.props.navigation)}} style={[styles.button, {
+            backgroundColor: 'purple',
+          }]}>
+            <Text style={styles.buttonText}>Explore jobs</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => {this.logOutClicked(this.props.navigation)}} style={[{
           backgroundColor: 'yellow',
           height: 60,
           justifyContent: 'center',
           alignItems: 'center',
         }]}>
           <Text style={[styles.buttonText]}>Log out</Text>
-        </TouchableOpacity>
+          </TouchableOpacity>
       </View>
     )
   }

@@ -19,7 +19,7 @@ export default class Login extends React.Component {
     STORAGE.load({
       key: 'credentials'
     }).then(creds => {
-      console.log('trying to log in with default creds')
+      console.log('trying to log in with default creds, which are:')
       console.log(JSON.stringify(creds))
       makeRequest({
         url: '/get-token/',
@@ -32,6 +32,9 @@ export default class Login extends React.Component {
           })
 
           this.props.navigation.navigate('Profile')
+        },
+        onError: json => {
+          POPUP('error', JSON.stringify(json))
         }
       })
     }).catch(err => {
