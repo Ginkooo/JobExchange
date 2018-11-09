@@ -24,4 +24,4 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = get_user_model()
-        fields = 'id username email'.split()
+        fields = 'id username email would_want would_do'.split()

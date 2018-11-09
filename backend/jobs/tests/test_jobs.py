@@ -61,3 +61,6 @@ class JobTests(TestCase):
 
         self.assertIn(self.user, job_do.users_doing.all())
         self.assertIn(self.user, job_want.users_wanting.all())
+
+    def test_can_list_related_jobs(self):
+        pass
