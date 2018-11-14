@@ -1,8 +1,9 @@
 import React from 'react'
 
-import { ScrollView, Text, View, Dimensions } from 'react-native'
-import {makeRequest} from './http-common'
+import { View, Switch, Text } from 'react-native'
+import { makeRequest } from './http-common'
 import Swipeable from 'react-native-swipeable'
+import { POPUP } from './popup'
 
 
 export default class JobButton extends React.Component {
@@ -10,63 +11,64 @@ export default class JobButton extends React.Component {
   constructor(props) {
 
     super(props)
+    this.state = {
+      would_want: false,
+      would_do: false
+    }
   }
 
-  initSwipeable(swipeable) {
-    console.log(swipeable)
+  switched(type, value) {
+    let s = {}
+    s[type] = value
+    this.setState(s)
+    let body = {
+      id: this.props.job.id
+    }
+    body[type] = value
+    makeRequest({
+      url: '/api/favjob/',
+      method: 'PUT',
+      body: body,
+      onSuccess: json => {
+      },
+      onError: json => {
+        s = {}
+        s[type] = false
+        this.setState(s)
+        POPUP('error', "Can't do that right now, try again later")
+      }
+    })
   }
-
-  rightClosed = (event, gestureState, swipeable) => {
-    console.log('I dont want to work')
-  }
-
-  rightOpened = (event, gestureState, swipeable) => {
-    console.log('I want to work')
-  }
-
-  leftClosed = (event, gestureState, swipeable) => {
-    console.log('I dont want to hire')
-  }
-
-  leftOpened = (event, gestureState, swipeable) => {
-    console.log('I want to hire')
-  }
-
 
   render() {
     return (
-      <Swipeable style={{
-        marginTop: 5
-      }} leftButtons={[
-      <View style={{padding: 2}}>
+      <View style={{
+        backgroundColor: 'lightskyblue',
+        height: 70,
+        marginTop: 10,
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'stretch'
+      }}>
+        <View>
+          <Text>Hire</Text>
+          <Switch value={this.state.would_want} onValueChange={value => {this.switched('would_want', value)}} />
+        </View>
         <Text style={{
-          textAlign: 'right'
-        }}>I want to hire</Text>
-      </View>
-      ]} rightButtons={[
-      <View style={{padding: 2}}>
-        <Text>I want to work</Text>
-      </View>
-      ]}
-      leftButtonsOpen={true}
-
-      onRightButtonsCloseRelease={this.rightClosed}
-      onRightButtonsOpenRelease={this.rightOpened}
-
-      onLeftButtonsCloseRelease={this.leftClosed}
-      onLeftButtonsOpenRelease={this.leftOpened}
-    >
-        <View style={{
-          backgroundColor: 'lightblue',
+          flex: 1,
           justifyContent: 'center',
           alignItems: 'center',
-          padding: 10
+          textAlignVertical: 'center',
+          textAlign: 'center',
+          fontSize: 20,
         }}>
-          <Text>
-            {this.props.job.name}
-          </Text>
+          {this.props.job.name}
+        </Text>
+        <View>
+          <Text>Work</Text>
+          <Switch value={this.state.would_do} onValueChange={value => {this.switched('would_do', value)}}/>
         </View>
-      </Swipeable>
+      </View>
     )
   }
 }

@@ -26,7 +26,7 @@ export async function makeRequest (config) {
   headers.Accept = 'application/json'
   headers['Content-Type'] = 'application/json'
 
-  let url = `http://192.168.1.9:8000${config.url}`
+  let url = `http://192.168.43.64:8000${config.url}`
 
   let fetch_args = {
     headers: headers,
@@ -48,6 +48,7 @@ export async function makeRequest (config) {
         })
         .catch(err => {
           console.log('server returned no json response during request')
+          config.onError()
           console.log(err)
         })
     })
@@ -56,4 +57,9 @@ export async function makeRequest (config) {
       console.log(`ERROR ${JSON.stringify(err)}`)
     })
   console.log(`Just made request to ${url}`)
+  if (config.body) {
+    console.log(config.body)
+  }
+
+  console.log('')
 }

@@ -25,7 +25,7 @@ export default class ExploreJobs extends React.Component {
 
   }
 
-  _keyExtractor = (item, index) => item.id
+  _keyExtractor = (item, index) => item.id.toString()
 
   render() {
     return (

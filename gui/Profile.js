@@ -25,6 +25,10 @@ export default class Profile extends React.Component {
     navigation.navigate('ExploreJobs')
   }
 
+  makeADealClicked(navigation) {
+    navigation.navigate('Deals')
+  }
+
   logOutClicked(navigation) {
 
     STORAGE.remove({
@@ -56,6 +60,11 @@ export default class Profile extends React.Component {
             backgroundColor: 'green',
           }]}>
             <Text style={styles.buttonText}>My jobs</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => {this.makeADealClicked(this.props.navigation)}} style={[styles.button, {
+            backgroundColor: 'lightskyblue',
+          }]}>
+            <Text style={styles.buttonText}>Make a deal</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => {this.exploreJobsClicked(this.props.navigation)}} style={[styles.button, {
             backgroundColor: 'purple',
