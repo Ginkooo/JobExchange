@@ -51,11 +51,6 @@ export default class Profile extends React.Component {
         flexDirection: 'column',
         alignItems: 'stretch'
       }}>
-        <View style={{
-          flex: 0.2
-        }}>
-          <Text>{this.state.username}</Text>
-          </View>
           <TouchableOpacity onPress={() => {this.myJobsClicked(this.props.navigation)}} style={[styles.button, {
             backgroundColor: 'green',
           }]}>

@@ -26,7 +26,7 @@ export async function makeRequest (config) {
   headers.Accept = 'application/json'
   headers['Content-Type'] = 'application/json'
 
-  let url = `http://192.168.43.64:8000${config.url}`
+  let url = `http://192.168.100.3:8000${config.url}`
 
   let fetch_args = {
     headers: headers,

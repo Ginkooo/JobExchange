@@ -6,6 +6,7 @@ import SignUp from './SignUp'
 import Profile from './Profile'
 import ExploreJobs from './ExploreJobs'
 import Deals from './Deals'
+import MyJobs from './MyJobs'
 
 const RootStack = createStackNavigator({
   Login: {
@@ -22,9 +23,12 @@ const RootStack = createStackNavigator({
   },
   Deals: {
     screen: Deals
+  },
+  MyJobs: {
+    screen: MyJobs
   }
 }, {
-  initialRouteName: 'Deals'
+  initialRouteName: 'Login'
 })
 
 export default class App extends React.Component {

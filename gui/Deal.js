@@ -25,7 +25,7 @@ export default class Deal extends React.Component {
       textAlign: 'center'
     }}>{this.props.user.type === 'would_do' ? 'Will work on' : 'Will hire for'}</Text>
   <Text style={{
-    fontSize: 24,
+    fontSize: 30,
     padding: 10,
     fontWeight: 'bold',
     textAlign: 'center'
